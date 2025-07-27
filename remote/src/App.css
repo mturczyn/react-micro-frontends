@@ -1,0 +1,12 @@
+.counter-btn {
+    border-radius: 1em;
+    border: 1px solid black;
+    transition: all 1s;
+    background-color: rgb(0, 102, 255);
+    color: black;
+}
+
+.counter-btn:hover {
+    background-color: rgb(17, 3, 118);
+    color: white;
+}
