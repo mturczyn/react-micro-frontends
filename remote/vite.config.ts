@@ -15,10 +15,12 @@ export default defineConfig({
             // What we are exposing
             exposes: {
                 './CounterButton': './src/CounterButton',
+                './SharedCounterButton': './src/SharedCounterButton',
+                './store': './src/store',
             },
             // Exposes/shares libraries that our components
             // rely on. In our case it's react and react-dom.
-            shared: ['react', 'react-dom'],
+            shared: ['react', 'react-dom', 'jotai'],
         }),
     ],
     build: {
