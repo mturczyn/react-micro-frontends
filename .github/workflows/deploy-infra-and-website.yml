@@ -1,0 +1,46 @@
+name: Deploy Azure Resources and Web Application to all Environments
+
+on:
+  push:
+    branches:
+    - master
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-remote-app-to-prod:
+    uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
+    with:
+      dockerContext: './remote'
+      dockerFilePath: './remote/Dockerfile'
+      microFrontendService: 'remote'
+      environmentType: 'prod'
+      resourceGroupName: intrinsic-rg
+      dockerBaseUrl: index.docker.io
+      dockerImageNameAndTag: module-federation-remote:latest
+    secrets:
+      clientId: ${{ secrets.AZURE_CLIENT_ID }}
+      tenantId: ${{ secrets.AZURE_TENANT_ID }}
+      subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      dockerUsername: ${{ secrets.DOCKER_USERNAME }}
+      dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
+  deploy-host-app-to-prod:
+    uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
+    needs: [deploy-remote-app-to-prod]
+    with:
+      dockerContext: './host'
+      dockerFilePath: './host/Dockerfile'
+      microFrontendService: 'host'
+      environmentType: 'prod'
+      resourceGroupName: intrinsic-rg
+      dockerBaseUrl: index.docker.io
+      dockerImageNameAndTag: module-federation-host:latest
+    secrets:
+      clientId: ${{ secrets.AZURE_CLIENT_ID }}
+      tenantId: ${{ secrets.AZURE_TENANT_ID }}
+      subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      dockerUsername: ${{ secrets.DOCKER_USERNAME }}
+      dockerPassword: ${{ secrets.DOCKER_PASSWORD }}

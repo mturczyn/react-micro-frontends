@@ -1,0 +1,16 @@
+# docker-compose.yaml
+version: '3.8'
+
+services:
+    module_federation_remote:
+        container_name: module-federation-remote
+        build:
+            context: ./remote
+        ports:
+            - 5001:80
+    module_federation_host:
+        container_name: module-federation-host
+        build:
+            context: ./host
+        ports:
+            - 3001:80
