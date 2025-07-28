@@ -12,7 +12,7 @@ COPY . /app
 
 ENV CI=false
 
-RUN npm run build
+RUN npm run build -- --mode production
 
 # 2. For Nginx setup
 FROM nginx:alpine
