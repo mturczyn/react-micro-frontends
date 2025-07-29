@@ -1,6 +1,6 @@
 @allowed(['prod', 'nonprod'])
 param environmentType string
-@allowed(['remote', 'host'])
+@allowed(['shared-components', 'home-app'])
 param microFrontendService string
 @secure()
 param dockerImageFullUrl string

@@ -11,33 +11,33 @@ permissions:
   contents: read
 
 jobs:
-  deploy-remote-app-to-prod:
+  deploy-shared-components-app-to-prod:
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
     with:
-      dockerContext: './remote'
-      dockerFilePath: './remote/Dockerfile'
-      microFrontendService: 'remote'
+      dockerContext: './shared-components'
+      dockerFilePath: './shared-components/Dockerfile'
+      microFrontendService: 'shared-components'
       environmentType: 'prod'
       resourceGroupName: intrinsic-rg
       dockerBaseUrl: index.docker.io
-      dockerImageNameAndTag: module-federation-remote:latest
+      dockerImageNameAndTag: module-federation-shared-components:latest
     secrets:
       clientId: ${{ secrets.AZURE_CLIENT_ID }}
       tenantId: ${{ secrets.AZURE_TENANT_ID }}
       subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       dockerUsername: ${{ secrets.DOCKER_USERNAME }}
       dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
-  deploy-host-app-to-prod:
+  deploy-home-app-to-prod:
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
-    needs: [deploy-remote-app-to-prod]
+    needs: [deploy-shared-components-app-to-prod]
     with:
-      dockerContext: './host'
-      dockerFilePath: './host/Dockerfile'
-      microFrontendService: 'host'
+      dockerContext: './home-app'
+      dockerFilePath: './home-app/Dockerfile'
+      microFrontendService: 'home-app'
       environmentType: 'prod'
       resourceGroupName: intrinsic-rg
       dockerBaseUrl: index.docker.io
-      dockerImageNameAndTag: module-federation-host:latest
+      dockerImageNameAndTag: module-federation-home-app:latest
     secrets:
       clientId: ${{ secrets.AZURE_CLIENT_ID }}
       tenantId: ${{ secrets.AZURE_TENANT_ID }}

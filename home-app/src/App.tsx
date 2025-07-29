@@ -1,7 +1,7 @@
 import './App.css'
-import { CounterButton } from 'remoteApp/CounterButton'
-import { SharedCounterButton } from 'remoteApp/SharedCounterButton'
-import useCount from 'remoteApp/store'
+import { CounterButton } from 'sharedComponents/CounterButton'
+import { SharedCounterButton } from 'sharedComponents/SharedCounterButton'
+import useCount from 'sharedComponents/store'
 
 function App() {
     const [count, setCount] = useCount()

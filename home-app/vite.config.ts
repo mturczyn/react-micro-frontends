@@ -5,14 +5,13 @@ import federation from '@originjs/vite-plugin-federation'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd(), '')
-
     return {
         plugins: [
             react(),
             federation({
                 name: 'host_app',
                 remotes: {
-                    remoteApp: env.VITE_REMOTE_URL,
+                    sharedComponents: env.VITE_SHARED_COMPONENTS_URL,
                 },
                 shared: ['react', 'react-dom'],
             }),

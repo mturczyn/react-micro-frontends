@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [
         react(),
         federation({
-            name: 'remote_counter_app',
+            name: 'shared_components_app',
             // It is default name used by bundler.
             // It's accessible under URL
             // localhost:5001/assets/remoteEntry.js
