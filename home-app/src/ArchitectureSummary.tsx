@@ -1,9 +1,4 @@
-import { CounterButton } from 'sharedComponents/CounterButton'
-import { SharedCounterButton } from 'sharedComponents/SharedCounterButton'
-import useCount from 'sharedComponents/store'
-
 export const ArchitectureSummary = () => {
-    const [count, setCount] = useCount()
     return (
         <div className="max-w-4xl mx-auto p-6 space-y-6 [&_pre]:bg-gray-700 [&_p]:pb-3 [&_p]:pt-3">
             <h1 className="text-3xl font-bold text-indigo-600">
@@ -148,43 +143,6 @@ CMD ["nginx", "-g", "daemon off;"]`}
 add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';
 add_header 'Access-Control-Allow-Headers' '*';`}
                 </pre>
-            </section>
-
-            <section>
-                <h2 className="text-xl font-semibold">
-                    Example usage of shared components from shared components
-                    microfrontend
-                </h2>
-                <p>
-                    Below is example of components defined in another
-                    microfrontend.
-                </p>
-                <p>Below button is just classic counter button:</p>
-                <CounterButton />
-
-                <h3 className="mt-3 text-l font-semibold">
-                    Shared state example (with Jotai)
-                </h3>
-                <p>
-                    Here's example of shared state between component imported
-                    from microfrontend, that uses also global state defined in
-                    that microfrontend (global state management is done using
-                    library <a href="https://jotai.org">Jotai</a>). Said
-                    microfrontend exposes also store to read and update global
-                    state used in below component.
-                </p>
-                <p>Below button is imported from microfrontend:</p>
-                <SharedCounterButton />
-                <p>
-                    Below button is just plain HTML button that uses global
-                    state imported from microfrontend:
-                </p>
-                <button
-                    className="host-btn"
-                    onClick={() => setCount((c: number) => c + 1)}
-                >
-                    count is {count} (from the remote store)
-                </button>
             </section>
         </div>
     )
