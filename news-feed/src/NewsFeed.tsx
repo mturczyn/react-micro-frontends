@@ -1,5 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
+import { QueryClient, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import { withQueryClient } from './withQueryClient'
+
+const queryClient = new QueryClient()
 
 type NewsArticle = {
     title: string
@@ -18,7 +21,7 @@ const fetchNews = async (): Promise<NewsArticle[]> => {
     return res.data.articles
 }
 
-export default function NewsFeed() {
+export const NewsFeed = withQueryClient(queryClient, function NewsFeed() {
     const { data, isLoading, error } = useQuery({
         queryKey: ['news'],
         queryFn: fetchNews,
@@ -58,4 +61,4 @@ export default function NewsFeed() {
             ))}
         </div>
     )
-}
+})

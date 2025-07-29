@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
                 name: 'host_app',
                 remotes: {
                     sharedComponents: env.VITE_SHARED_COMPONENTS_URL,
+                    newsFeed: env.VITE_NEWS_FEED_URL,
                 },
                 shared: ['react', 'react-dom'],
             }),
