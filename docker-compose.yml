@@ -8,6 +8,12 @@ services:
             context: ./shared-components
         ports:
             - 5001:80
+    module_federation_news_feed:
+        container_name: module-federation-news-feed
+        build:
+            context: ./news-feed
+        ports:
+            - 5002:80
     module_federation_home_app:
         container_name: module-federation-home-app
         build:
