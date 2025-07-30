@@ -21,6 +21,7 @@ jobs:
       shared-components: ${{ steps.filter.outputs.shared-components }}
     steps:
     # For pull requests it's not necessary to checkout the code
+    - uses: actions/checkout@v3
     - uses: dorny/paths-filter@v3
       id: filter
       with:
