@@ -11,7 +11,7 @@ function App() {
             <NavBar>
                 <nav>
                     <ul
-                        className=" flex flex-col [&_li]:hover:bg-gray-300 [&_li]:ease-in-out
+                        className="flex flex-col [&_li]:hover:bg-gray-300 [&_li]:ease-in-out
                             [&_li]:transition-[background] [&_li]:duration-900 [&_a]:block [&_a]:p-2"
                     >
                         <li>
