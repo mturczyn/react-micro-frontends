@@ -5,32 +5,30 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import useCount from 'sharedComponents/store'
 import { CounterButton } from 'sharedComponents/CounterButton'
 import { SharedCounterButton } from 'sharedComponents/SharedCounterButton'
+import FloatingNavMenu from './FloatingNavMenu'
 
 function App() {
     return (
         <BrowserRouter>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/architecture">
-                            Architecture and project description
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/news-feed">News Feed</Link>
-                    </li>
-                    <li>
-                        <Link to="/shared-components-example">
-                            Shared Components Example
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+            <FloatingNavMenu>
+                <nav>
+                    <ul className="flex flex-col [&_li]:p-2 [&_li]:hover:bg-gray-300 [&_li]:transition-[background] [&_li]:duration-900 [&_li]:ease-in-out">
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/news-feed">News Feed</Link>
+                        </li>
+                        <li>
+                            <Link to="/shared-components-example">
+                                Shared Components Example
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+            </FloatingNavMenu>
             <Routes>
-                <Route path="/architecture" Component={ArchitectureSummary} />
+                <Route path="/" Component={ArchitectureSummary} />
                 <Route path="/news-feed" Component={NewsFeedWithInformation} />
                 <Route
                     path="/shared-components-example"
@@ -43,7 +41,7 @@ function App() {
 
 const NewsFeedWithInformation = () => (
     <>
-        <h1 className="sticky top-0 bg-inherit">
+        <h1 className="sticky top-0 text-center text-xl bg-gray-800">
             News feed from another microfrontend
         </h1>
         <NewsFeed />
