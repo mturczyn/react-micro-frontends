@@ -20,6 +20,10 @@
 
 body {
     @apply bg-gray-800;
+    /* This is hack, as other microfrontends bring their own CSS for body.
+    To be resolved in
+    https://github.com/mturczyn/react-micro-frontends/issues/1 */
+    display: initial !important;
 }
 
 a {
