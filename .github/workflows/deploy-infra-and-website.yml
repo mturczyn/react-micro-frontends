@@ -29,7 +29,6 @@ jobs:
       dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
   deploy-news-feed-to-prod:
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
-    needs: [deploy-shared-components-app-to-prod]
     with:
       dockerContext: './news-feed'
       dockerFilePath: './news-feed/Dockerfile'
@@ -46,7 +45,6 @@ jobs:
       dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
   deploy-home-app-to-prod:
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
-    needs: [deploy-news-feed-to-prod]
     with:
       dockerContext: './home-app'
       dockerFilePath: './home-app/Dockerfile'
