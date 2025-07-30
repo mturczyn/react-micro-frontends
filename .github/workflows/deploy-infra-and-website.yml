@@ -11,8 +11,17 @@ permissions:
   contents: write
 
 jobs:
+  login-to-azure:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   deploy-shared-components-app-to-prod:
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
+    needs: login-to-azure
     with:
       dockerContext: './shared-components'
       dockerFilePath: './shared-components/Dockerfile'
@@ -29,6 +38,7 @@ jobs:
       dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
   deploy-news-feed-to-prod:
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
+    needs: login-to-azure
     with:
       dockerContext: './news-feed'
       dockerFilePath: './news-feed/Dockerfile'
@@ -45,6 +55,7 @@ jobs:
       dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
   deploy-home-app-to-prod:
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
+    needs: login-to-azure
     with:
       dockerContext: './home-app'
       dockerFilePath: './home-app/Dockerfile'

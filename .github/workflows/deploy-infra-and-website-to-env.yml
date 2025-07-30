@@ -1,9 +1,5 @@
 name: Deploy Azure Resources and Web Application to Environment
 
-permissions:
-  id-token: write
-  contents: write
-  
 on:
   workflow_call:
     inputs:
@@ -41,14 +37,7 @@ jobs:
     outputs:
       webAppName: ${{ steps.deploy-infrastructure.outputs.webAppName }}
     steps:
-    - name: Set up mutex
-      uses: ben-z/gh-action-mutex@v1.0.0-alpha.10
     - uses: actions/checkout@v3
-    - uses: azure/login@v2
-      with:
-        client-id: ${{ secrets.clientId }}
-        tenant-id: ${{ secrets.tenantId }}
-        subscription-id: ${{ secrets.subscriptionId }}
     - uses: azure/arm-deploy@v1
       id: deploy-infrastructure
       with:
@@ -89,14 +78,6 @@ jobs:
     #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-    - name: Set up mutex
-      uses: ben-z/gh-action-mutex@v1.0.0-alpha.10
-    - uses: azure/login@v2
-      with:
-        client-id: ${{ secrets.clientId }}
-        tenant-id: ${{ secrets.tenantId }}
-        subscription-id: ${{ secrets.subscriptionId }}
-    
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
