@@ -11,7 +11,29 @@ permissions:
   contents: write
 
 jobs:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-latest
+    # Set job outputs to values from filter step
+    outputs:
+      home-app: ${{ steps.filter.outputs.home-app }}
+      news-feed: ${{ steps.filter.outputs.news-feed }}
+      shared-components: ${{ steps.filter.outputs.shared-components }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          home-app:
+            - 'home-app/**'
+          news-feed:
+            - 'news-feed/**'
+          shared-components:
+            - 'shared-components/**'
   deploy-shared-components-app-to-prod:
+    needs: changes
+    if: ${{ needs.changes.outputs.shared-components == 'true' }}
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
     with:
       dockerContext: './shared-components'
@@ -28,6 +50,8 @@ jobs:
       dockerUsername: ${{ secrets.DOCKER_USERNAME }}
       dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
   deploy-news-feed-to-prod:
+    needs: changes
+    if: ${{ needs.changes.outputs.news-feed == 'true' }}
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
     with:
       dockerContext: './news-feed'
@@ -44,6 +68,8 @@ jobs:
       dockerUsername: ${{ secrets.DOCKER_USERNAME }}
       dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
   deploy-home-app-to-prod:
+    needs: changes
+    if: ${{ needs.changes.outputs.home-app == 'true' }}
     uses: './.github/workflows/deploy-infra-and-website-to-env.yml'
     with:
       dockerContext: './home-app'
