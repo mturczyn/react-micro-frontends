@@ -1,18 +1,19 @@
 import './App.css'
-import { NewsFeed } from 'newsFeed/NewsFeed'
 import { ArchitectureSummary } from './ArchitectureSummary'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
-import useCount from 'sharedComponents/store'
-import { CounterButton } from 'sharedComponents/CounterButton'
-import { SharedCounterButton } from 'sharedComponents/SharedCounterButton'
-import FloatingNavMenu from './FloatingNavMenu'
+import { NavBar } from './NavBar'
+import { ExampleOfSharedComponentsWithGlobalState } from './ExampleOfSharedComponentsWithGlobalState'
+import { NewsFeedWithInformation } from './NewsFeedWithInformation'
 
 function App() {
     return (
         <BrowserRouter>
-            <FloatingNavMenu>
+            <NavBar>
                 <nav>
-                    <ul className="flex flex-col [&_li]:p-2 [&_li]:hover:bg-gray-300 [&_li]:transition-[background] [&_li]:duration-900 [&_li]:ease-in-out">
+                    <ul
+                        className="flex flex-col [&_li]:hover:bg-gray-300 [&_li]:ease-in-out
+                            [&_li]:transition-[background] [&_li]:duration-900 [&_a]:block [&_a]:p-2"
+                    >
                         <li>
                             <Link to="/">Home</Link>
                         </li>
@@ -26,7 +27,7 @@ function App() {
                         </li>
                     </ul>
                 </nav>
-            </FloatingNavMenu>
+            </NavBar>
             <Routes>
                 <Route path="/" Component={ArchitectureSummary} />
                 <Route path="/news-feed" Component={NewsFeedWithInformation} />
@@ -36,56 +37,6 @@ function App() {
                 />
             </Routes>
         </BrowserRouter>
-    )
-}
-
-const NewsFeedWithInformation = () => (
-    <>
-        <h1 className="sticky top-0 text-center text-xl bg-gray-800">
-            News feed from another microfrontend
-        </h1>
-        <NewsFeed />
-    </>
-)
-
-const ExampleOfSharedComponentsWithGlobalState = () => {
-    const [count, setCount] = useCount()
-    return (
-        <section>
-            <h2 className="text-xl font-semibold">
-                Example usage of shared components from shared components
-                microfrontend
-            </h2>
-            <p>
-                Below is example of components defined in another microfrontend.
-            </p>
-            <p>Below button is just classic counter button:</p>
-            <CounterButton />
-
-            <h3 className="mt-3 text-l font-semibold">
-                Shared state example (with Jotai)
-            </h3>
-            <p>
-                Here's example of shared state between component imported from
-                microfrontend, that uses also global state defined in that
-                microfrontend (global state management is done using library{' '}
-                <a href="https://jotai.org">Jotai</a>). Said microfrontend
-                exposes also store to read and update global state used in below
-                component.
-            </p>
-            <p>Below button is imported from microfrontend:</p>
-            <SharedCounterButton />
-            <p>
-                Below button is just plain HTML button that uses global state
-                imported from microfrontend:
-            </p>
-            <button
-                className="host-btn"
-                onClick={() => setCount((c: number) => c + 1)}
-            >
-                count is {count} (from the remote store)
-            </button>
-        </section>
     )
 }
 
