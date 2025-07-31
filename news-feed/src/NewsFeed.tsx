@@ -1,5 +1,5 @@
 import { QueryClient, useQuery } from '@tanstack/react-query'
-import axios from 'axios'
+import axios, { AxiosError, type AxiosResponse } from 'axios'
 import { withQueryClient } from './withQueryClient'
 
 const queryClient = new QueryClient()
@@ -18,7 +18,7 @@ const fetchNews = async (): Promise<NewsArticle[]> => {
     const res = await axios.get(
         `https://gnews.io/api/v4/top-headlines?lang=en&token=${API_KEY}`
     )
-    return res.data.articles
+    return res?.data.articles
 }
 
 export const NewsFeed = withQueryClient(queryClient, function NewsFeed() {
@@ -26,9 +26,17 @@ export const NewsFeed = withQueryClient(queryClient, function NewsFeed() {
         queryKey: ['news'],
         queryFn: fetchNews,
     })
-
+    console.log(error)
     if (isLoading) return <div className="text-center p-4">Loading news...</div>
-    if (error) return <div className="text-red-500 p-4">Error loading news</div>
+    if (error)
+        return (
+            <div className="text-red-500 p-4 grid place-items-center">
+                <h1 className="text-xl">Error loading news</h1>
+                {(error as AxiosError)?.status === 401 && (
+                    <p>Daily news limit has been reached.</p>
+                )}
+            </div>
+        )
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
