@@ -1,5 +1,5 @@
 import { QueryClient, useQuery } from '@tanstack/react-query'
-import axios, { AxiosError, type AxiosResponse } from 'axios'
+import axios, { AxiosError } from 'axios'
 import { withQueryClient } from './withQueryClient'
 
 const queryClient = new QueryClient()

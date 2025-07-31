@@ -11,7 +11,7 @@ export default defineConfig(({ command }) => {
 
     const entryPoint = isDevCommand
         ? 'index.html'
-        : resolve(__dirname, './src/indexExposed.ts')
+        : resolve(__dirname, './src/index.ts')
 
     return {
         plugins: [

@@ -12,6 +12,7 @@ COPY . /app
 
 ENV CI=false
 
+RUN npm install --save-dev @types/node
 RUN npm run build
 
 # 2. For Nginx setup
