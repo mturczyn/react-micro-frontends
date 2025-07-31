@@ -49,7 +49,9 @@ export default function FloatingNavMenu({ children }: PropsWithChildren) {
                 {/* Menu items - only visible when expanded */}
                 {isOpen && children}
             </div>
-            <div ref={hiddenDivRef}> </div>
+            <div ref={hiddenDivRef} className="w-1">
+                {' '}
+            </div>
         </>
     )
 }
