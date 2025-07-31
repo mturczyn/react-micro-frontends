@@ -16,13 +16,19 @@ export const ArchitectureSummary = () => {
                     <strong>Home App</strong> (Shell) - this application
                 </li>
                 <li>
-                    <a
-                        href={
-                            new URL(import.meta.env.VITE_SHARED_COMPONENTS_URL)
-                                .origin
-                        }
-                    >
-                        <strong>Shared Components</strong>
+                    <a href={import.meta.env.VITE_SHARED_COMPONENTS_URL}>
+                        <strong>Shared Components</strong> - only{' '}
+                        <pre>remoteEntry.js</pre> file, as this microfrontend
+                        does not have{' '}
+                        <a
+                            href={
+                                new URL(import.meta.env.VITE_NEWS_FEED_URL)
+                                    .origin
+                            }
+                        >
+                            index page
+                        </a>
+                        .
                     </a>
                 </li>
                 <li>
