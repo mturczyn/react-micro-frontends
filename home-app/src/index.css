@@ -20,7 +20,6 @@
 
 body {
     @apply bg-gray-800;
-    display: initial;
 }
 
 a {
