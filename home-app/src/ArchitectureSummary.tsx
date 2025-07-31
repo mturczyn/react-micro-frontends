@@ -68,7 +68,7 @@ export const ArchitectureSummary = () => {
 VITE_REMOTE_URL=http://localhost:5001/assets/remoteEntry.js
 
 # .env.production (prod)
-VITE_REMOTE_URL=https://mf-remote.azurewebsites.net/assets/remoteEntry.js`}
+VITE_REMOTE_URL=https://mfe-remote.azurewebsites.net/assets/remoteEntry.js`}
                 </pre>
 
                 <p>

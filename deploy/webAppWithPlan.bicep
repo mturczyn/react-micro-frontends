@@ -10,8 +10,8 @@ var tags = { env: environmentType }
 
 var appServicePlanName = 'intrinsic-${environmentType}-asp'
 var webappName = environmentType == 'prod' 
-  ? 'mf-${microFrontendService}' 
-  : 'mf-${microFrontendService}-${environmentType}-webapp'
+  ? 'mfe-${microFrontendService}' 
+  : 'mfe-${microFrontendService}-${environmentType}-webapp'
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2023-12-01' = {
   name: appServicePlanName
