@@ -1,6 +1,6 @@
 import './App.css'
 import { ArchitectureSummary } from './ArchitectureSummary'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
 import { NavBar } from './NavBar'
 import { ExampleOfSharedComponentsWithGlobalState } from './ExampleOfSharedComponentsWithGlobalState'
 import { NewsFeedWithInformation } from './NewsFeedWithInformation'
@@ -35,6 +35,8 @@ function App() {
                     path="/shared-components-example"
                     Component={ExampleOfSharedComponentsWithGlobalState}
                 />
+                {/* default redirect to home page */}
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </BrowserRouter>
     )
