@@ -1,6 +1,6 @@
-import { CounterButton } from './exposed/CounterButton'
-import { SharedCounterButton } from './exposed/SharedCounterButton'
-import useCount from './exposed/store'
+import { CounterButton } from './CounterButton'
+import { SharedCounterButton } from './SharedCounterButton'
+import useCount from './store'
 
 export { CounterButton, SharedCounterButton }
 export default useCount

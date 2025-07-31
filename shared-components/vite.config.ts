@@ -1,17 +1,20 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import federation from '@originjs/vite-plugin-federation'
-import { resolve } from 'path'
+// import { resolve } from 'path'
 
 // https://vite.dev/config/
-export default defineConfig(({ command }) => {
-    // Only will affect dev, when we running it with server.
-    // With preview, assets already are build in dist.
-    const isDevCommand = command === 'serve'
+// Commented parts are for informational purposes only:
+// it was used to modify build based on parameters passed
+// into vite command (like command "serve", etc.)
+export default defineConfig((/*{ command }*/) => {
+    // // Only will affect dev, when we running it with server.
+    // // With preview, assets already are build in dist.
+    // const isDevCommand = command === 'serve'
 
-    const entryPoint = isDevCommand
-        ? 'index.html'
-        : resolve(__dirname, './src/index.ts')
+    // const entryPoint = isDevCommand
+    //     ? 'index.html'
+    //     : resolve(__dirname, './src/index.ts')
 
     return {
         plugins: [
@@ -24,10 +27,9 @@ export default defineConfig(({ command }) => {
                 filename: 'remoteEntry.js',
                 // What we are exposing
                 exposes: {
-                    './CounterButton': './src/exposed/CounterButton',
-                    './SharedCounterButton':
-                        './src/exposed/SharedCounterButton',
-                    './store': './src/exposed/store',
+                    './CounterButton': './src/CounterButton',
+                    './SharedCounterButton': './src/SharedCounterButton',
+                    './store': './src/store',
                 },
                 // Exposes/shares libraries that our components
                 // rely on. In our case it's react and react-dom.
@@ -35,9 +37,9 @@ export default defineConfig(({ command }) => {
             }),
         ],
         build: {
-            rollupOptions: {
-                input: entryPoint,
-            },
+            // rollupOptions: {
+            //     input: entryPoint,
+            // },
             cssCodeSplit: false,
         },
     }

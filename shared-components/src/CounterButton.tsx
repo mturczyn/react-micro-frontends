@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import '../App.css'
+import './App.css'
 
 export const CounterButton = () => {
     const [counter, setCounter] = useState(0)
